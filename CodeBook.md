@@ -2,42 +2,56 @@
 # Code Book
 The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set.
 
-## Source data
-As you read README.md, input data can be downloaded [Here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
 
-And brief description of the variables [HERE](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+## Data Source
+As you read README.md, input data can be downloaded **[Here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)**
 
-## Tidy data
+And brief description of the variables **[HERE](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)**
 
-The aim of the project is to provide clean valuable data. Through the run_analysis.R script, the input data is cleaned and the result is a .txt file with the most representative variables. 
 
-These variables represent the mean and standard deviation of different parameters, such as acceleration samples for each coordenate (X,Y,Z), angular speed, etc.
+## Tidy Data
+The aim of the project is to provide clean valuable data. Through the run_analysis.R script, the input data is cleaned and the result is tidy_data.txt file. 
 
-These variables are grouped by an activity and a subject. With this activity and subject we can differentiate the mean of the acceleration in the coordenate X when the subject 1 is walking, from the mean of the acceleration in the coordenate X when the subject 1 is laying, or the acceleration that suffers two different subjects when their are doing the same activity.
 
-* __subject__
-Subject identifier. Type: integer. Range: from 1 to 30.
-* __activity__
-Activity identifier. Type: string. 6 possible values: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING and LAYING.
+## Data Variables
+**Files what we need :**
+- 'features_info.txt': Shows information about the variables used on the feature vector.
+- 'features.txt': List of all features.
+- 'activity_labels.txt': Links the class labels with their activity name.
+- 'train/X_train.txt': Training set.
+- 'train/y_train.txt': Training labels.
+- 'test/X_test.txt': Test set.
+- 'test/y_test.txt': Test labels.
 
-### Measures
+**There are 3 types of data.**
+1. ```features``` 
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. The set of variables that were estimated from these signals are: 
 
-All measured parameters are floating-point values, normalised and bounded within [-1,1]. 
+* mean(): Mean value
+* std(): Standard deviation
+* mad(): Median absolute deviation 
+* max(): Largest value in array
+* min(): Smallest value in array
+* sma(): Signal magnitude area
+* energy(): Energy measure. Sum of the squares divided by the number of values. 
+* iqr(): Interquartile range 
+* entropy(): Signal entropy
+* arCoeff(): Autorregresion coefficients with Burg order equal to 4
+* correlation(): correlation coefficient between two signals
+* maxInds(): index of the frequency component with largest magnitude
+* meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+* skewness(): skewness of the frequency domain signal 
+* kurtosis(): kurtosis of the frequency domain signal 
+* bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
+* angle(): Angle between to vectors.
 
-The measurements are classified into two different domains: time-domain and frequency-domain.
+2. ```labels``` 
+The labels mean activity. Each datasets in test and train folder, there's a ```y_xxxx.txt``` file including the type of activity. You will need to match this file with ```activity_lables.txt``` to see what this integer values exactly mean.
 
-Some examples can be:
-- `t.Body.Acc.mean.X`
-- `f.Body.Acc.Jerk.mean.X`
+3. ```sets``` 
+The sets mean exact result of measured value. Each datasets in test and train folder, there's a ```x_xxxx.txt``` file.
 
-Where *t.* refers to a time-domain signal and *f.* to a frequency-domain signal.
 
-## Transformations
 
-The performed transformations are:
 
-1. Merge training and test sets.
-2. Extract mean and standard deviation measurements.
-3. Substitue activity identifier by activity description.
-4. Clean variable names: remove duplicated dots, remove dots at the end of the variable name, and inside a variable name separate words with dots.
-5. Calculate average value of measurements grouped by activity and subject.
+
