@@ -4,9 +4,9 @@ The purpose of this project is to demonstrate your ability to collect, work with
 
 
 ## Data Source
-As you read README.md, input data can be downloaded **[Here](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)**
+As you read README.md, input data can be downloaded at **[HERE](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)**
 
-And brief description of the variables **[HERE](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)**
+And brief description of the variables at **[HERE](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)**
 
 
 ## Tidy Data
@@ -24,7 +24,7 @@ The aim of the project is to provide clean valuable data. Through the run_analys
 - 'test/y_test.txt': Test labels.
 
 **There are 3 types of data.**
-**1. ```features``` **
+1. **```features``` **
 The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. The set of variables that were estimated from these signals are: 
 
 * mean(): Mean value
@@ -45,10 +45,10 @@ The features selected for this database come from the accelerometer and gyroscop
 * bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT of each window.
 * angle(): Angle between to vectors.
 
-**2. ```labels``` **
+2. **```labels``` **
 The labels mean activity. Each datasets in test and train folder, there's a ```y_xxxx.txt``` file including the type of activity. You will need to match this file with ```activity_lables.txt``` to see what this integer values exactly mean.
 
-**3. ```sets``` **
+3. **```sets``` **
 The sets mean exact result of measured value. Each datasets in test and train folder, there's a ```x_xxxx.txt``` file.
 
 
