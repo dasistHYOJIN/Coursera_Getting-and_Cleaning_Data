@@ -1,4 +1,11 @@
 
+# Load libraries
+library(dplyr)
+
+# Set directory
+getwd()
+setwd("C:\\Users\\Hyo-Jin\\Documents\\Getting and Cleaning Data")
+
 # Load Data
 subject_train <- read.table("./UCI HAR Dataset/train/subject_train.txt", fill = TRUE)
 subject_test <- read.table("./UCI HAR Dataset/test/subject_test.txt", fill = TRUE)
@@ -16,48 +23,39 @@ names(subject_test)[1] <- "Subject"
 names(activity_labels) <- c("Label", "Activity")
 
 
+
 ### 1. Merges the training and the test sets to create one data set. ###
-trainings <- cbind(subject_train, training_labels, training_sets)
-tests <- cbind(subject_test, test_labels, test_sets)
 # Bind all together
-dataSet <- rbind(trainings, tests)
+dataSet <- rbind(training_sets, test_sets)
 dim(dataSet)
 names(dataSet)
 
 
 ### 2. Extracts only the measurements on the mean and standard deviation for each measurement. ###
-data <- grep("mean()|std()", features[, 2]) 
-extractedSet <- dataSet[,data]
+dataRow <- grep("mean()|std()", features[, 2]) 
+extractedSet <- dataSet[,dataRow]
 dim(extractedSet)
 names(extractedSet)
 
 
+### 4. Appropriately labels the data set with descriptive variable names. ###
+names(extractedSet) <- features[,2][dataRow]
+names(extractedSet)
+# bind Labels data to Sets data
+dataLabels <- rbind(training_labels, test_labels)
+dataSubjects <- rbind(subject_train, subject_test)
+bindedSet <- cbind(dataSubjects, dataLabels, extractedSet)
+
+
 ### 3. Uses descriptive activity names to name the activities in the data set ###
-activities <- factor(extractedSet$Label)
-levels(activities) <- activity_labels[,2]
-extractedSet$Label <- activities
-
-# or
-name_activity <- function(l) {
-  switch (l,
-    "1" = return("WALKING"),
-    "2" = return("WALKING_UPSTAIRS"),
-    "3" = return("WALKING_DOWNSTAIRS"),
-    "4" = return("SITTING"),
-    "5" = return("STANDING"),
-    "6" = return("LAYING")
-  )
-}
-extractedSet$Label <- sapply(extractedSet$Label, name_activity)
+bindedSet$Label <- sapply(bindedSet$Label, function(x) { activity_labels[[2]][x] })
+namedSet <- bindedSet
+names(namedSet)
 
 
-# 4. Appropriately labels the data set with descriptive variable names.
+### 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. ###
+secondSet <- namedSet %>% 
+  group_by(Subject, Label) %>%
+  summarise_all(mean)
 
-
-
-# 5. From the data set in step 4, creates a second, 
- # independent tidy data set with the average of each variable for each activity and each subject.
-
-
-
-write.table(secondDataSet, "tidy_data.txt")
+write.table(secondSet, "tidy_data.txt")
